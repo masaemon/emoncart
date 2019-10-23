@@ -34,7 +34,7 @@ public class CarController : MonoBehaviour
     private void Start ()
     {
         SetControllers ();
-        Time.timeScale = 1.6f;
+        Time.timeScale = 1.5f;
     }
     
     private void FixedUpdate()
