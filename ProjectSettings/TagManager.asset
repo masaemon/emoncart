@@ -3,7 +3,13 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - sector1
+  - sector2
+  - sector3
+  - sector4
+  - car
+  - controlline
   layers:
   - Default
   - TransparentFX

@@ -20,7 +20,9 @@ public class CarController : MonoBehaviour
     public float maxSteeringAngle;
     public float breakTorque;
     public float Downforce;
-    
+
+    public GameObject generalCourseManager;
+
     private static readonly Joycon.Button[] m_buttons =
         Enum.GetValues (typeof (Joycon.Button)) as Joycon.Button[];
     private List<Joycon> m_joycons;
@@ -112,5 +114,28 @@ public class CarController : MonoBehaviour
         if (m_joycons == null || m_joycons.Count <= 0) return;
         m_joyconL = m_joycons.Find (c => c.isLeft);
         m_joyconR = m_joycons.Find (c => !c.isLeft);
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        switch (other.gameObject.tag)
+        {
+            case "controlline":
+                generalCourseManager.GetComponent<GeneralCourseManager>().onSectorChange(1);
+                break;
+            case "sector1":
+                generalCourseManager.GetComponent<GeneralCourseManager>().onSectorChange(2);
+                break;
+            case "sector2":
+                generalCourseManager.GetComponent<GeneralCourseManager>().onSectorChange(3);
+                break;
+            case "sector3":
+                generalCourseManager.GetComponent<GeneralCourseManager>().onSectorChange(4);
+                break;
+            case "sector4":
+                generalCourseManager.GetComponent<GeneralCourseManager>().onSectorChange(5);
+                break;
+                
+        }
     }
 }
