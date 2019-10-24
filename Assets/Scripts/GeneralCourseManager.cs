@@ -9,11 +9,16 @@ public class GeneralCourseManager : MonoBehaviour
     [SerializeField] private Text LapTimeSecText;
     [SerializeField] private Text LapTimeMSecText;
     [SerializeField] private Text LapCountText;
+    [SerializeField] private Text BestLapMinText;
+    [SerializeField] private Text BestLapSecText;
+    [SerializeField] private Text BestLapMSecText;
 
     private static int laps = 0;
     private static int driverSector = 0;
 
     private bool isCorrectLap = true;
+
+    private float bestLap = 0f;
 
     private float time = 0;
     
@@ -44,6 +49,18 @@ public class GeneralCourseManager : MonoBehaviour
 
     private void updateLap()
     {
+        if (laps == 1 || time < bestLap)
+        {
+            bestLap = time;
+            float fixedTime = bestLap / Time.timeScale;
+            int min = (int) fixedTime / 60;
+            int sec = (int) fixedTime % 60;
+            int msec = (int) (fixedTime * 1000 % 1000);
+            BestLapMinText.text = min < 10 ? "0" + min.ToString() : min.ToString();
+            BestLapSecText.text = sec < 10 ? "0" + sec.ToString() : sec.ToString();
+            BestLapMSecText.text = msec < 10 ? "00" + msec.ToString() :
+                msec < 100 ? "0" + msec.ToString() : msec.ToString();
+        }
         time = 0;
         laps += 1;
         LapCountText.text = laps.ToString();
